@@ -15,6 +15,7 @@ const updateAvatar = async (req, res) => {
   await image.writeAsync(req.file.path);
 
   const filename = `${_id}_${originalname}`;
+  const avatarsDir = path.join(__dirname, '../', '../', 'public', 'avatars');
   const resultUpload = path.join(avatarDir, filename);
   await fs.rename(tmpUpload, resultUpload);
   const avatarURL = path.join('avatars', filename);
