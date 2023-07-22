@@ -12,6 +12,8 @@ const router = express.Router();
 
 router.post('/register', validateBody(schemas.registerSchema), ctrlWrapper(ctrl.register));
 
+router.post('/verify', validateBody(schemas.emailSchema), ctrlWrapper(ctrl.resendVerifyEmail));
+
 router.post('/login', validateBody(schemas.loginSchema), ctrlWrapper(ctrl.login));
 
 router.get('/current', authenticate, ctrlWrapper(ctrl.getCurrent));

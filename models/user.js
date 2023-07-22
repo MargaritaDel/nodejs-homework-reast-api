@@ -24,9 +24,22 @@ const userSchema = new Schema(
       enum: ['starter', 'pro', 'business'],
       default: 'starter',
     },
+    
+    verify: {
+      type: Boolean,
+      default: false,
+    },
+    verificationToken: {
+      type: String,
+      required: [true, 'Verify token is required'],
+    },
+
+
     avatarURL: String,
     token: String,
   },
+ 
+
   { versionKey: false, timestamps: true }
 );
 
@@ -47,6 +60,13 @@ const updateSubscriptionSchema = Joi.object({
     .required()
     .valid('starter', 'pro', 'business')
     .error(new Error('Missing field subscription')),
+});
+
+const emailSchema = Joi.object({
+  email: Joi.string()
+    .pattern(emailRegexp)
+    .required()
+    .error(new Error('Missing required field email')),
 });
 
 const schemas = {
